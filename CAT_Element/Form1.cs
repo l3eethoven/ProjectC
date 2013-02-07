@@ -51,8 +51,9 @@ namespace CAT_Element
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int cellnone = 1;
-            int cellnonerow = 1;
+           
+            string oldval = " ";
+            string mapval = " ";
             Workbook Mapping_workbook = m_app.Workbooks.Open(textBox1.Text,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
                 , Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
@@ -70,81 +71,54 @@ namespace CAT_Element
             Worksheet new_sheetbook = Old_workbook.Sheets[Old_workbook.Sheets.Count];
 
             richTextBox3.Text += "Creating New sheet .....\n";
-            for (int createsheet_i = 1; createsheet_i <= 40000; createsheet_i++)    //สร้าง ชีท ใหม่ โดยใช้ข้อมู,จาก old sheet
+            for (int createsheet_i = 1; createsheet_i <= 40; createsheet_i++)    //สร้าง ชีท ใหม่ โดยใช้ข้อมู,จาก old sheet
             {
                 Range old_valuerow = old.Cells[createsheet_i, 5];
 
-                for (int createsheet = 1; createsheet <= 100; createsheet++)
+                for (int createsheet = 1; createsheet <= 10; createsheet++)
                 {
                     Range old_value = old.Cells[createsheet_i, createsheet];    //ได้ ค่าจาก ชีท เดิม มา
                     new_sheetbook.Cells[createsheet_i, createsheet] = old_value.Value;
-
-                    if (old_value.Value == null) {
-                        cellnone++;
-                        if (cellnone >= 20)
-                        {
-                            createsheet = 101;
-                        }
-                        else cellnone = 1;
-                    }
+                    richTextBox3.Text = "created at row [" + createsheet_i + "," + createsheet + "].....\n";
                 }
 
-                if (old_valuerow.Value == null)
-                {
-                    cellnone++;
-                    if (cellnonerow >= 50)
-                    {
-                        createsheet_i = 40001;
-                    }
-                    else cellnonerow = 1;
-                }
+                
             }
             richTextBox3.Text += "New sheet are created .....\n";
-            
 
-
-            cellnone = 1;
-
-            for (int i = 1; i <= 40000; i++)
+            string countlog = " ";
+            for (int i = 1; i <= 400; i++)
             {
                 Range mapping_cell = mapping.Cells[i, 1];   //เรียกค่า ใน mapping sheet แถวที่ i คอลัมที่ 1
                 richTextBox1.Text = "Compare at row " + i+"\n";
 
-                for (int x = 1; x <= 40000; x++) {        //กำหนดจำนวนของ แถวที่ให้ค้น หาใน sheet old
-                    richTextBox2.Text += "compare at row " + x + "\n";
+                for (int x = 1; x <= 10; x++) {        //กำหนดจำนวนของ แถวที่ให้ค้น หาใน sheet old
+                    richTextBox2.Text = "compare at row " + x + "\n";
+                    richTextBox3.Text += countlog;
+
                     Range old_cell = old.Cells[i,5];
-                    
-                    if (mapping_cell.Value == old_cell.Value) {
+
+                    string s = old_cell.Value;
+                    string d = mapping_cell.Value;
+                    oldval = s.ToString();
+                    mapval = d.ToString();
+                  //  string mappingstr = mapping_cell.Value.ToString();
+                   // string oldstr = old_cell.Value.ToString();
+
+                    if (oldval == mapval)
+                    {
                         new_sheetbook.Cells[i, 5] = mapping.Cells[i, 6];
                         new_sheetbook.Cells[i, 6] = mapping.Cells[i, 8];
+                        countlog += "Edit at Row " + i + ", Mapping = " + mapval + ", Source file = " + oldval + " .\n";
                     }
+                   
                     
                 
                 }
-
-
-
-
-
-                if (mapping_cell.Value == null)               //ส่วนตรวจสอบว่า cell ว่าง หรือเปล่า
-                {
-                    if (cellnone >= 100)
-                    {                   //หาก Cell ว่างเกิน 100 ช่อง ให้ ออกจากลูป โดยการเซ็ต i = 50000         
-                        i = 50000;
-                    }
-                    
-                    cellnone++;                             //หาก cell ว่างและ ยังติดต่อกันไม่ถึง 100 ช่อง ให้เพิ่ม ค่า cell none อีก 1
-
-                }
-                else {
-                    cellnone = 1;                           // ถ้า หาก ว่า cell ไม่ว่าง ให้กำหนด ค่า cellnone ที่ 1 ใหม่
-
-                }
-
-
-
-
+                
             }
+            richTextBox2.Text += "Compare Finished";
+            richTextBox1.Text += "Compare Finished";
 
         }
     }

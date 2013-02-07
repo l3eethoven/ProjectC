@@ -136,9 +136,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(874, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.Size = new System.Drawing.Size(25, 13);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Don\'t Edit";
+            this.label3.Text = "Log";
             // 
             // Form1
             // 

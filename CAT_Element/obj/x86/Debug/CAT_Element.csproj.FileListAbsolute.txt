@@ -7,3 +7,12 @@ D:\ProjectC\CAT_Element\CAT_Element\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\ProjectC\CAT_Element\CAT_Element\obj\x86\Debug\GenerateResource.write.1.tlog
 D:\ProjectC\CAT_Element\CAT_Element\obj\x86\Debug\CAT_Element.exe
 D:\ProjectC\CAT_Element\CAT_Element\obj\x86\Debug\CAT_Element.pdb
+D:\GITC\ProjectC\CAT_Element\obj\x86\Debug\CAT_Element.exe
+D:\GITC\ProjectC\CAT_Element\obj\x86\Debug\CAT_Element.pdb
+D:\GITC\ProjectC\CAT_Element\bin\Debug\CAT_Element.exe
+D:\GITC\ProjectC\CAT_Element\bin\Debug\CAT_Element.pdb
+D:\GITC\ProjectC\CAT_Element\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\GITC\ProjectC\CAT_Element\obj\x86\Debug\CAT_Element.Form1.resources
+D:\GITC\ProjectC\CAT_Element\obj\x86\Debug\CAT_Element.Properties.Resources.resources
+D:\GITC\ProjectC\CAT_Element\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\GITC\ProjectC\CAT_Element\obj\x86\Debug\GenerateResource.write.1.tlog
