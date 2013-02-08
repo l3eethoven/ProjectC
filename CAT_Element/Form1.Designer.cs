@@ -74,7 +74,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(196, 20);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "select source file directory";
+            this.textBox1.Text = "D:\\CAT_work\\MappingTest.xlsx";
             // 
             // textBox2
             // 
@@ -83,7 +83,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(218, 20);
             this.textBox2.TabIndex = 4;
-            this.textBox2.Text = "select old file directory";
+            this.textBox2.Text = "D:\\CAT_work\\Oldtest.xlsx";
             // 
             // richTextBox2
             // 

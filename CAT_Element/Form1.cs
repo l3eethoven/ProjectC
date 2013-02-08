@@ -52,14 +52,14 @@ namespace CAT_Element
         private void button3_Click(object sender, EventArgs e)
         {
            
-            string oldval = " ";
-            string mapval = " ";
+            //string oldval = " ";
+            //string mapval = " ";
             Workbook Mapping_workbook = m_app.Workbooks.Open(textBox1.Text,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
                 , Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
             if (Mapping_workbook == null)
                 return;
-           
+
             Workbook Old_workbook = m_app.Workbooks.Open(textBox2.Text,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
                 , Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
@@ -71,7 +71,7 @@ namespace CAT_Element
             Worksheet new_sheetbook = Old_workbook.Sheets[Old_workbook.Sheets.Count];
 
             richTextBox3.Text += "Creating New sheet .....\n";
-            for (int createsheet_i = 1; createsheet_i <= 40; createsheet_i++)    //สร้าง ชีท ใหม่ โดยใช้ข้อมู,จาก old sheet
+            for (int createsheet_i = 1; createsheet_i <= 100; createsheet_i++)    //สร้าง ชีท ใหม่ โดยใช้ข้อมู,จาก old sheet
             {
                 Range old_valuerow = old.Cells[createsheet_i, 5];
 
@@ -91,26 +91,27 @@ namespace CAT_Element
             {
                 Range mapping_cell = mapping.Cells[i, 1];   //เรียกค่า ใน mapping sheet แถวที่ i คอลัมที่ 1
                 richTextBox1.Text = "Compare at row " + i+"\n";
+                string mapping2 = " " + mapping_cell.Value;
 
                 for (int x = 1; x <= 10; x++) {        //กำหนดจำนวนของ แถวที่ให้ค้น หาใน sheet old
                     richTextBox2.Text = "compare at row " + x + "\n";
                     richTextBox3.Text += countlog;
 
                     Range old_cell = old.Cells[i,5];
-
-                    string s = old_cell.Value;
-                    string d = mapping_cell.Value;
-                    oldval = s.ToString();
-                    mapval = d.ToString();
+                    
+                        string old2 = " " + old_cell.Value;
+                    
+                    
                   //  string mappingstr = mapping_cell.Value.ToString();
                    // string oldstr = old_cell.Value.ToString();
-
-                    if (oldval == mapval)
+                    
+                    if ("1A00000" == mapping2.Trim())
                     {
                         new_sheetbook.Cells[i, 5] = mapping.Cells[i, 6];
                         new_sheetbook.Cells[i, 6] = mapping.Cells[i, 8];
-                        countlog += "Edit at Row " + i + ", Mapping = " + mapval + ", Source file = " + oldval + " .\n";
+                      // countlog += "Edit at Row " + i + "Ma pping = " + mapping_cell.Value + ", Source file = " + old_cell.Value + " .\n";
                     }
+                    old2 = old_cell.Value;
                    
                     
                 
