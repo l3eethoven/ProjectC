@@ -91,21 +91,25 @@ namespace CAT_Element
             {
                 Range mapping_cell = mapping.Cells[i, 1];   //เรียกค่า ใน mapping sheet แถวที่ i คอลัมที่ 1
                 richTextBox1.Text = "Compare at row " + i+"\n";
-                string mapping2 = " " + mapping_cell.Value;
+                string mapping2 = mapping_cell.Value;
+                mapping2 = mapping2.Trim();
+                mapping2 = " " + mapping2;
 
                 for (int x = 1; x <= 10; x++) {        //กำหนดจำนวนของ แถวที่ให้ค้น หาใน sheet old
                     richTextBox2.Text = "compare at row " + x + "\n";
-                    richTextBox3.Text += countlog;
+                    //richTextBox3.Text += countlog;
 
                     Range old_cell = old.Cells[i,5];
-                    
-                        string old2 = " " + old_cell.Value;
+                    string old2 = old_cell.Value;
+
+                    old2 = old2.Trim();
+                    old2 = " " + old2;
                     
                     
                   //  string mappingstr = mapping_cell.Value.ToString();
                    // string oldstr = old_cell.Value.ToString();
                     
-                    if ("1A00000" == mapping2.Trim())
+                    if (old2 == mapping2)
                     {
                         new_sheetbook.Cells[i, 5] = mapping.Cells[i, 6];
                         new_sheetbook.Cells[i, 6] = mapping.Cells[i, 8];
