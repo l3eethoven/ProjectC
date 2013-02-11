@@ -198,6 +198,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "CAT Network Element Compare";
+           
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -56,6 +56,9 @@ namespace CAT_Element
            
             //string oldval = " ";
             //string mapval = " ";
+            int count_emptyrow1 = 0;
+            string cmp = " ";
+            //int count_emptyrow2 = 0;
             string add_row = textBox8.Text;
 
             //int aaa = Int16.Parse(textBox8.Text);
@@ -103,43 +106,50 @@ namespace CAT_Element
                 mapping2 = mapping2.Trim();
                 mapping2 = " " + mapping2;
 
-                for (int x = 1; x <= Int16.Parse(textBox8.Text); x++)
-                {        //กำหนดจำนวนของ แถวที่ให้ค้น หาใน sheet old
-                    textBox6.Text = x.ToString();
-                    //richTextBox3.Text += countlog;
+                if (mapping2 != cmp)
+                {
+                    for (int x = 1; x <= Int16.Parse(textBox8.Text); x++)
+                    {        //กำหนดจำนวนของ แถวที่ให้ค้น หาใน sheet old
+                        textBox6.Text = x.ToString();
+                        //richTextBox3.Text += countlog;
 
-                    Range old_cell = old.Cells[x,5];
-                    string old2 = " "+old_cell.Value;
+                        Range old_cell = old.Cells[x, 5];
+                        string old2 = " " + old_cell.Value;
 
-                    old2 = old2.Trim();
-                    old2 = " " + old2;
-                    
-                    
-                  //  string mappingstr = mapping_cell.Value.ToString();
-                   // string oldstr = old_cell.Value.ToString();
-                    
-                    if (old2 == mapping2)
-                    {
-                        new_sheetbook.Cells[x, 5] = mapping.Cells[i, 6];
-                        new_sheetbook.Cells[x, 6] = mapping.Cells[i, 8];
-                      //countlog += "Edit at source row : "+x+" , Repalce value "+mapping.Cells[i,6]+" , "+mapping.Cells[i,8]+ ".\n";
-                        richTextBox3.Text += "\n Edit at Mapping row =" + i + " , Edit at Source file row =" + x;
+                        old2 = old2.Trim();
+                        old2 = " "+ old2;
+                        if (old2 != cmp)
+                        {
+                            count_emptyrow1 = 0;
+                            //  string mappingstr = mapping_cell.Value.ToString();
+                            // string oldstr = old_cell.Value.ToString();
+
+                            if (old2 == mapping2)
+                            {
+                                new_sheetbook.Cells[x, 5] = mapping.Cells[i, 6];
+                                new_sheetbook.Cells[x, 6] = mapping.Cells[i, 8];
+                                //countlog += "Edit at source row : "+x+" , Repalce value "+mapping.Cells[i,6]+" , "+mapping.Cells[i,8]+ ".\n";
+                                richTextBox3.Text += "\n Edit at Mapping row =" + i + " , Edit at Source file row =" + x;
+                            }
+                            old2 = old_cell.Value;
+
+                        }
+                        else {
+                            count_emptyrow1++;
+                            if (count_emptyrow1 == 10) {
+                                x = Int16.Parse(textBox8.Text);
+                            }
+                        }
                     }
-                    old2 = old_cell.Value;
-                   
-                    
-                
                 }
+                
                 
             }
             richTextBox3.Text += "\n\n Compare Finished";
             //richTextBox1.Text += "Compare Finished";
             Old_workbook.Save();
             m_app.Workbooks.Close();
-            m_app.Quit();
-            
+            m_app.Quit(); 
         }
-
-       
     }
 }
