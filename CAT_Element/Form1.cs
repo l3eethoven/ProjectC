@@ -14,6 +14,8 @@ namespace CAT_Element
     {
         Microsoft.Office.Interop.Excel.Application m_app;
 
+        
+
         public Form1()
         {
             
@@ -54,6 +56,11 @@ namespace CAT_Element
            
             //string oldval = " ";
             //string mapval = " ";
+            string add_row = textBox8.Text;
+
+            //int aaa = Int16.Parse(textBox8.Text);
+            
+
             Workbook Mapping_workbook = m_app.Workbooks.Open(textBox1.Text,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
                 , Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
@@ -71,14 +78,15 @@ namespace CAT_Element
             Worksheet new_sheetbook = Old_workbook.Sheets[Old_workbook.Sheets.Count];
 
             richTextBox3.Text += "Creating New sheet .....\n";
-            for (int createsheet_i = 1; createsheet_i <= 100; createsheet_i++)    //สร้าง ชีท ใหม่ โดยใช้ข้อมู,จาก old sheet
+            for (int createsheet_i = 1; createsheet_i <= Int16.Parse(textBox8.Text); createsheet_i++)    //สร้าง ชีท ใหม่ โดยใช้ข้อมู,จาก old sheet
             {
                 Range old_valuerow = old.Cells[createsheet_i, 5];
 
                 for (int createsheet = 1; createsheet <= 10; createsheet++)
                 {
                     Range old_value = old.Cells[createsheet_i, createsheet];    //ได้ ค่าจาก ชีท เดิม มา
-                    new_sheetbook.Cells[createsheet_i, createsheet] = old_value.Value;
+                    string newsheet_val = " "+old_value.Value;
+                    new_sheetbook.Cells[createsheet_i, createsheet] = newsheet_val;
                     richTextBox3.Text = "created at row [" + createsheet_i + "," + createsheet + "].....\n";
                 }
 
@@ -86,21 +94,22 @@ namespace CAT_Element
             }
             richTextBox3.Text += "New sheet are created .....\n";
 
-            string countlog = " ";
-            for (int i = 1; i <= 400; i++)
+           // string countlog = " ";
+            for (int i = 1; i <= Int16.Parse(textBox8.Text); i++)
             {
-                Range mapping_cell = mapping.Cells[i, 1];   //เรียกค่า ใน mapping sheet แถวที่ i คอลัมที่ 1
-                richTextBox1.Text = "Compare at row " + i+"\n";
-                string mapping2 = mapping_cell.Value;
+                Range mapping_cell = mapping.Cells[i, 1];   //เรียกค่า ใน mapping sheet แถวที่ i คอลัมที่ 1    
+                textBox4.Text = i.ToString();
+                string mapping2 = " "+mapping_cell.Value;
                 mapping2 = mapping2.Trim();
                 mapping2 = " " + mapping2;
 
-                for (int x = 1; x <= 10; x++) {        //กำหนดจำนวนของ แถวที่ให้ค้น หาใน sheet old
-                    richTextBox2.Text = "compare at row " + x + "\n";
+                for (int x = 1; x <= Int16.Parse(textBox8.Text); x++)
+                {        //กำหนดจำนวนของ แถวที่ให้ค้น หาใน sheet old
+                    textBox6.Text = x.ToString();
                     //richTextBox3.Text += countlog;
 
-                    Range old_cell = old.Cells[i,5];
-                    string old2 = old_cell.Value;
+                    Range old_cell = old.Cells[x,5];
+                    string old2 = " "+old_cell.Value;
 
                     old2 = old2.Trim();
                     old2 = " " + old2;
@@ -111,9 +120,10 @@ namespace CAT_Element
                     
                     if (old2 == mapping2)
                     {
-                        new_sheetbook.Cells[i, 5] = mapping.Cells[i, 6];
-                        new_sheetbook.Cells[i, 6] = mapping.Cells[i, 8];
-                      // countlog += "Edit at Row " + i + "Ma pping = " + mapping_cell.Value + ", Source file = " + old_cell.Value + " .\n";
+                        new_sheetbook.Cells[x, 5] = mapping.Cells[i, 6];
+                        new_sheetbook.Cells[x, 6] = mapping.Cells[i, 8];
+                      //countlog += "Edit at source row : "+x+" , Repalce value "+mapping.Cells[i,6]+" , "+mapping.Cells[i,8]+ ".\n";
+                        richTextBox3.Text += "\n Edit at Mapping row =" + i + " , Edit at Source file row =" + x;
                     }
                     old2 = old_cell.Value;
                    
@@ -122,9 +132,14 @@ namespace CAT_Element
                 }
                 
             }
-            richTextBox2.Text += "Compare Finished";
-            richTextBox1.Text += "Compare Finished";
-
+            richTextBox3.Text += "\n\n Compare Finished";
+            //richTextBox1.Text += "Compare Finished";
+            Old_workbook.Save();
+            m_app.Workbooks.Close();
+            m_app.Quit();
+            
         }
+
+       
     }
 }
